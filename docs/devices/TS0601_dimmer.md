@@ -14,7 +14,7 @@ description: "Integrate your TuYa TS0601_dimmer via Zigbee2MQTT with whatever sm
 | Description | Zigbee smart dimmer |
 | Exposes | light (state, brightness), linkquality |
 | Picture | ![TuYa TS0601_dimmer](../images/devices/TS0601_dimmer.jpg) |
-| White-label | Larkkey ZSTY-SM-1DMZG-EU, Earda EDM-1ZAA-EU, Earda EDM-1ZAB-EU, Earda EDM-1ZBA-EU |
+| White-label | Larkkey ZSTY-SM-1DMZG-EU, Earda EDM-1ZAA-EU, Earda EDM-1ZAB-EU, Earda EDM-1ZBA-EU, Mercator ikuü SISWD01 |
 
 ## Notes
 
@@ -74,9 +74,6 @@ light:
     state_topic: "zigbee2mqtt/<FRIENDLY_NAME>"
     availability_topic: "zigbee2mqtt/bridge/state"
     brightness: true
-    color_temp: false
-    xy: false
-    hs: false
     schema: "json"
     command_topic: "zigbee2mqtt/<FRIENDLY_NAME>/set"
     brightness_scale: 254
@@ -87,7 +84,9 @@ sensor:
     availability_topic: "zigbee2mqtt/bridge/state"
     value_template: "{{ value_json.linkquality }}"
     unit_of_measurement: "lqi"
+    enabled_by_default: false
     icon: "mdi:signal"
+    state_class: "measurement"
 ```
 {% endraw %}
 

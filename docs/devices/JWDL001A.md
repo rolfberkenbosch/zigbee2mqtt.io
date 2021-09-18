@@ -20,6 +20,10 @@ description: "Integrate your Xiaomi JWDL001A via Zigbee2MQTT with whatever smart
 ### Device type specific configuration
 *[How to use device type specific configuration](../information/configuration.md)*
 
+* `color_sync`: Synchronizes the color values in the state, e.g. if the state contains `color_temp` and `color.xy` and
+the `color_temp` is set, `color.xy` will be updated to match the `color_temp`. (default: `true`)
+
+
 * `transition`: Controls the transition time (in seconds) of on/off, brightness,
 color temperature (if applicable) and color (if applicable) changes. Defaults to `0` (no transition).
 Note that this value is overridden if a `transition` value is present in the MQTT command payload.
@@ -84,12 +88,12 @@ light:
     state_topic: "zigbee2mqtt/<FRIENDLY_NAME>"
     availability_topic: "zigbee2mqtt/bridge/state"
     brightness: true
-    color_temp: true
-    xy: false
-    hs: false
     schema: "json"
     command_topic: "zigbee2mqtt/<FRIENDLY_NAME>/set"
     brightness_scale: 254
+    color_mode: true
+    supported_color_modes: 
+      - "color_temp"
     max_mireds: 500
     min_mireds: 150
     effect: true
@@ -107,7 +111,9 @@ sensor:
     availability_topic: "zigbee2mqtt/bridge/state"
     value_template: "{{ value_json.linkquality }}"
     unit_of_measurement: "lqi"
+    enabled_by_default: false
     icon: "mdi:signal"
+    state_class: "measurement"
 ```
 {% endraw %}
 
